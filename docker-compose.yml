@@ -1,0 +1,20 @@
+version: '1'
+
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: uploader
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    volumes:
+      - /Users/dennishuang/source/jojo/WEB/upload:/app/upload
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
