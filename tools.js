@@ -1,7 +1,7 @@
 const multer = require('multer')
 const mkdirp = require('mkdirp')
 const path = require("path");
-const upload = ()=>{
+const upload = (req,res)=>{
     const storage  = multer.diskStorage({
         destination:async (req,file,cb)=>{
             await mkdirp(`./upload`)
@@ -10,7 +10,8 @@ const upload = ()=>{
         filename:(req,file,cb)=>{
             let extname = path.extname(file.originalname);
             let fileName = uuid()
-            cb(null,`${fileName}-${Date.now()}${extname}`)
+            let label = req.body["label"]
+            cb(null,`${label}-${fileName}-${Date.now()}${extname}`)
         }
     })
 
