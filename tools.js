@@ -10,7 +10,7 @@ const upload = (req,res)=>{
         filename:(req,file,cb)=>{
             let extname = path.extname(file.originalname);
             let fileName = uuid()
-            let label = req.body["label"]
+            let label = req.query["label"]
             cb(null,`${label}-${fileName}-${Date.now()}${extname}`)
         }
     })
